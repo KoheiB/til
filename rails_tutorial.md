@@ -27,3 +27,31 @@ $ git push -u origin --all
 ### 1.5.2 Herokuにデプロイする (1)
 Herokuにデプロイする際に、Commitのコマンドが漏れていたため、エラーが出た。  
 Commitしてやり直したところ、解決した。
+
+
+### 2.1 アプリケーションの計画
+Herokuにデプロイするところで苦戦。  
+昨日やったはずなのになぜかうまくいかず、デプロイが中断されてしまう。  
+調べたところ、Herokuはアプリケーションがエラーで動かないとデプロイが中断されるとのこと。
+自分で書いたプログラムを見直すと、半角スペース漏れがあったため、修正。再度デプロイ。  
+今度はURLを開いてもMethod Not Allowedと表示されてしまう。
+これで１時間以上悩んだが、git push heroku master後のターミナル上のURLに飛んでいたことが原因。
+```
+remote: Verifying deploy... done.
+To https://git.heroku.com/shielded-plains-01139.git
+   cd90529..c019b66  master -> master
+```
+
+heroku createの際に表示されていたURLからアクセスして、無事に表示されていることが確認できた。
+```
+ec2-user:~/environment/toy_app (master) $ heroku create
+Creating app... done, ⬢ shielded-plains-01139
+https://shielded-plains-01139.herokuapp.com/ | https://git.heroku.com/shielded-plains-01139.git
+```
+
+第２章の勉強に入る前の導入時点で、かなりの遠回りになってしまった。
+
+参考URL：同じミスしてた人　https://teratail.com/questions/149443
+
+第２章の内容は、Progateで勉強した内容の復習だったので、その後は比較的スムーズに進んだ。  
+しかし、デプロイでやはりherokuがNomethodErrorになったため、herokuをインストールするコマンドを再入力したところ、直った。
